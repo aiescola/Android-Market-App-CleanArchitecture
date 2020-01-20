@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Shopify</string>
+
+    <string name="title_buy">Buy</string>
+    <string name="title_cart">Cart</string>
+
+    <string name="filter">Filter</string>
+
+    <string name="price_format">$%.2f</string>
+    <string name="amount">Amount</string>
+
+    <string name="error_loading_products">There was an error loading products</string>
+    <string name="product">Product</string>
+    <string name="total_dots">Total:</string>
+    <string name="subtotal">Subtotal</string>
+</resources>

@@ -1,0 +1,40 @@
+package com.aitor.samplemarket.usecase
+
+import arrow.core.some
+import com.aitor.samplemarket.DiscountMother.PRODUCT_DISCOUNT
+import com.aitor.samplemarket.discount.model.Discount
+import com.aitor.samplemarket.discount.repository.DiscountRepository
+import com.aitor.samplemarket.discount.usecase.FetchDiscounts
+import io.mockk.every
+import io.mockk.mockk
+import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
+
+class FetchDiscountTest {
+
+    private val discountRepository = mockk<DiscountRepository>()
+    private lateinit var fetchDiscounts: FetchDiscounts
+
+    @Before
+    fun setupTests() {
+        fetchDiscounts = FetchDiscounts(discountRepository)
+    }
+
+    @Test
+    fun `fetch discount `() {
+        val expectedDiscount = givenOneDiscount()
+
+        val testDiscount = fetchDiscounts()
+
+        assertEquals(expectedDiscount.some(), testDiscount)
+    }
+
+    private fun givenOneDiscount(): Discount {
+        val discount = PRODUCT_DISCOUNT.asDomainModel()
+
+        every { discountRepository.fetchDiscounts() } returns discount.some()
+
+        return discount
+    }
+}

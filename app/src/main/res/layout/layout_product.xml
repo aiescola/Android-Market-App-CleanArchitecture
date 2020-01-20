@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="70dp">
+
+    <TextView
+            android:id="@+id/product_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/product_price"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            tools:text="texto muy largo que haga elipsis"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_medium"
+            android:textColor="@color/softBlack"
+    />
+
+    <TextView
+            android:id="@+id/product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@id/product_name"
+            app:layout_constraintEnd_toStartOf="@+id/product_final_price"
+            android:layout_marginEnd="@dimen/horizontal_item_margin"
+            android:textSize="@dimen/text_small"
+            android:textStyle="italic"
+            android:textColor="@color/softBlack"
+            tools:text="99.99€"
+    />
+
+    <TextView
+            android:id="@+id/product_final_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/buy_amount"
+            app:layout_constraintBaseline_toBaselineOf="@id/product_name"
+            android:layout_marginStart="@dimen/horizontal_item_margin"
+            android:layout_marginEnd="@dimen/horizontal_item_margin"
+            android:textSize="@dimen/text_small"
+            android:textStyle="italic"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="99.99€"/>
+
+    <EditText
+            android:id="@+id/buy_amount"
+            android:layout_width="55dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/buy_button"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:hint="@string/amount"
+            android:imeOptions="actionDone"
+            style="@style/RoundedEditText"
+    />
+
+    <ImageButton
+            android:id="@+id/buy_button"
+            android:layout_width="@dimen/small_icon_size"
+            android:layout_height="@dimen/small_icon_size"
+            android:background="@drawable/add_to_cart_button"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"
+            tools:visibility="visible"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

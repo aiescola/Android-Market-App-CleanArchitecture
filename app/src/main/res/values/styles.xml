@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>"
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
+    <style name="RoundedEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/rounded_edit_text</item>
+        <item name="android:textSize">@dimen/text_small</item>
+    </style>
+
+    <style name="SearchBoxEditText" parent="RoundedEditText">
+        <item name="android:textSize">@dimen/text_big</item>
+        <item name="android:elevation">6dp</item>
+        <item name="android:layout_marginTop">@dimen/vertical_margin</item>
+        <item name="android:layout_marginStart">@dimen/horizontal_margin</item>
+        <item name="android:layout_marginEnd">@dimen/horizontal_margin</item>
+        <item name="android:inputType">text</item>
+        <item name="android:paddingStart">@dimen/horizontal_item_margin</item>
+    </style>
+
+    <style name="ErrorLabel">
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textColor">@color/softBlack</item>
+    </style>
+
+</resources>

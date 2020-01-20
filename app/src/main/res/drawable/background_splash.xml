@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/colorPrimary"/>
+
+    <item
+            android:drawable="@drawable/ic_shopping_bag_logo"
+            android:height="@dimen/splash_size"
+            android:width="@dimen/splash_size"
+            android:gravity="center">
+    </item>
+
+</layer-list>
