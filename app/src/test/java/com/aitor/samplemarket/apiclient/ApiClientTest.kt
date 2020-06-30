@@ -27,7 +27,7 @@ class ApiClientTest : MockWebServerTest() {
 
         apiClient.allProducts
 
-        assertGetRequestSentTo("/bins/4bwec")
+        assertGetRequestSentTo("/api/products")
     }
 
     @Test
