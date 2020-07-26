@@ -2,9 +2,9 @@ package com.aitor.samplemarket.usecase
 
 import arrow.core.some
 import com.aitor.samplemarket.DiscountMother.PRODUCT_DISCOUNT
-import com.aitor.samplemarket.discount.model.Discount
-import com.aitor.samplemarket.discount.repository.DiscountRepository
-import com.aitor.samplemarket.discount.usecase.FetchDiscounts
+import com.aitor.samplemarket.domain.model.Discount
+import com.aitor.samplemarket.domain.repository.DiscountRepository
+import com.aitor.samplemarket.domain.usecase.FetchDiscounts
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
@@ -18,7 +18,9 @@ class FetchDiscountTest {
 
     @Before
     fun setupTests() {
-        fetchDiscounts = FetchDiscounts(discountRepository)
+        fetchDiscounts = FetchDiscounts(
+            discountRepository
+        )
     }
 
     @Test

@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aitor.samplemarket.R
 import com.aitor.samplemarket.common.showToast
-import com.aitor.samplemarket.discount.model.Discount
-import com.aitor.samplemarket.product.model.Product
+import com.aitor.samplemarket.domain.model.Discount
+import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.shop.screens.shop.adapter.ProductAdapter
 import kotlinx.android.synthetic.main.fragment_shop.*
 import kotlinx.android.synthetic.main.layout_discount.*

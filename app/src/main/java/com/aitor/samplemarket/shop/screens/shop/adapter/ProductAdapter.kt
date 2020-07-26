@@ -13,7 +13,7 @@ import com.aitor.samplemarket.R
 import com.aitor.samplemarket.common.getPriceString
 import com.aitor.samplemarket.common.inflate
 import com.aitor.samplemarket.common.toInt
-import com.aitor.samplemarket.product.model.Product
+import com.aitor.samplemarket.domain.model.Product
 import kotlinx.android.synthetic.main.layout_product.view.*
 import timber.log.Timber
 

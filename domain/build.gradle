@@ -1,0 +1,14 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    api "io.arrow-kt:arrow-core-data:$arrow_version"
+    kapt "io.arrow-kt:arrow-meta:$arrow_version"
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

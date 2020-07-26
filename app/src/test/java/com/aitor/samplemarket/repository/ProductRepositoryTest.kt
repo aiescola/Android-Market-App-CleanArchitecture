@@ -2,10 +2,10 @@ package com.aitor.samplemarket.repository
 
 import arrow.core.right
 import com.aitor.samplemarket.NetworkProductMother
-import com.aitor.samplemarket.product.network.NetworkProductsAnswer
-import com.aitor.samplemarket.product.network.TypeNetworkProductDataSource
-import com.aitor.samplemarket.product.repository.ProductRepository
-import com.aitor.samplemarket.product.repository.ProductRepositoryImpl
+import com.aitor.samplemarket.data.network.datasource.TypeNetworkProductDataSource
+import com.aitor.samplemarket.data.network.model.NetworkProductsAnswer
+import com.aitor.samplemarket.data.repository.ProductRepositoryImpl
+import com.aitor.samplemarket.domain.repository.ProductRepository
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
@@ -19,7 +19,10 @@ class ProductRepositoryTest {
 
     @Before
     fun setup() {
-        productRepository = ProductRepositoryImpl(mockNetworkProductDataSource)
+        productRepository =
+            ProductRepositoryImpl(
+                mockNetworkProductDataSource
+            )
     }
 
     @Test
@@ -31,7 +34,10 @@ class ProductRepositoryTest {
     }
 
     private fun givenANetworkProductAnswer(): NetworkProductsAnswer {
-        val networkProductAnswer = NetworkProductsAnswer(NetworkProductMother.networkProducts)
+        val networkProductAnswer =
+            NetworkProductsAnswer(
+                NetworkProductMother.networkProducts
+            )
         every { mockNetworkProductDataSource.all } returns networkProductAnswer.right()
         return networkProductAnswer
     }

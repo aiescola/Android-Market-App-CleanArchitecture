@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.None
 import arrow.core.Some
-import com.aitor.samplemarket.cart.usecase.AddItemToCart
-import com.aitor.samplemarket.discount.model.Discount
-import com.aitor.samplemarket.discount.usecase.FetchDiscounts
-import com.aitor.samplemarket.product.model.Product
-import com.aitor.samplemarket.product.usecase.FetchProducts
+import com.aitor.samplemarket.domain.usecase.AddItemToCart
+import com.aitor.samplemarket.domain.model.Discount
+import com.aitor.samplemarket.domain.usecase.FetchDiscounts
+import com.aitor.samplemarket.domain.model.Product
+import com.aitor.samplemarket.domain.usecase.FetchProducts
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

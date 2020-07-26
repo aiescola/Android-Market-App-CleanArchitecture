@@ -2,9 +2,9 @@ package com.aitor.samplemarket.repository
 
 import com.aitor.samplemarket.BaseTest
 import com.aitor.samplemarket.ProductMother
-import com.aitor.samplemarket.cart.model.CartItem
-import com.aitor.samplemarket.cart.repository.CartRepositoryImpl
-import com.aitor.samplemarket.product.model.Product
+import com.aitor.samplemarket.domain.model.CartItem
+import com.aitor.samplemarket.data.repository.CartRepositoryImpl
+import com.aitor.samplemarket.domain.model.Product
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -18,7 +18,8 @@ class CartRepositoryTest : BaseTest() {
 
     @Before
     fun setup() {
-        cartRepository = CartRepositoryImpl()
+        cartRepository =
+            CartRepositoryImpl()
     }
 
     @Test

@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.Option
-import com.aitor.samplemarket.cart.model.CartItem
-import com.aitor.samplemarket.cart.usecase.DeleteCartItem
-import com.aitor.samplemarket.cart.usecase.FetchCartItems
-import com.aitor.samplemarket.cart.usecase.UpdateCartItem
-import com.aitor.samplemarket.discount.model.Discount
-import com.aitor.samplemarket.discount.usecase.FetchDiscounts
-import com.aitor.samplemarket.product.model.Product
+import com.aitor.samplemarket.domain.model.CartItem
+import com.aitor.samplemarket.domain.usecase.DeleteCartItem
+import com.aitor.samplemarket.domain.usecase.FetchCartItems
+import com.aitor.samplemarket.domain.usecase.UpdateCartItem
+import com.aitor.samplemarket.domain.model.Discount
+import com.aitor.samplemarket.domain.usecase.FetchDiscounts
+import com.aitor.samplemarket.domain.model.Product
 import kotlinx.coroutines.launch
 
 class CartViewModel(

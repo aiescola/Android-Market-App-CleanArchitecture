@@ -2,9 +2,9 @@ package com.aitor.samplemarket.usecase
 
 import arrow.core.right
 import com.aitor.samplemarket.ProductMother.listOfProducts
-import com.aitor.samplemarket.product.model.Product
-import com.aitor.samplemarket.product.repository.ProductRepository
-import com.aitor.samplemarket.product.usecase.FetchProducts
+import com.aitor.samplemarket.domain.model.Product
+import com.aitor.samplemarket.domain.repository.ProductRepository
+import com.aitor.samplemarket.domain.usecase.FetchProducts
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
@@ -17,7 +17,8 @@ class FetchProductsTest {
 
     @Before
     fun setup() {
-        fetchProducts = FetchProducts(productRepository)
+        fetchProducts =
+            FetchProducts(productRepository)
     }
 
     @Test

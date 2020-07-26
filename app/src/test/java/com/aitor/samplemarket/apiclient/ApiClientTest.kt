@@ -3,9 +3,10 @@ package com.aitor.samplemarket.apiclient
 import arrow.core.left
 import arrow.core.right
 import com.aitor.samplemarket.MockWebServerTest
-import com.aitor.samplemarket.base.ApiClient
-import com.aitor.samplemarket.product.network.NetworkProduct
-import com.aitor.samplemarket.product.network.NetworkProductsAnswer
+import com.aitor.samplemarket.data.network.ApiClient
+import com.aitor.samplemarket.domain.model.ApiError
+import com.aitor.samplemarket.data.network.model.NetworkProduct
+import com.aitor.samplemarket.data.network.model.NetworkProductsAnswer
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -18,7 +19,8 @@ class ApiClientTest : MockWebServerTest() {
     override fun setUp() {
         super.setUp()
         val mockWebServerEndpoint = baseEndpoint
-        apiClient = ApiClient(mockWebServerEndpoint)
+        apiClient =
+            ApiClient(mockWebServerEndpoint)
     }
 
     @Test
@@ -45,7 +47,7 @@ class ApiClientTest : MockWebServerTest() {
 
         val response = apiClient.allProducts
 
-        assertEquals(ApiClient.ApiError.UnknownError(400).left(), response)
+        assertEquals(ApiError.UnknownError(400).left(), response)
     }
 
     @Test
@@ -54,7 +56,7 @@ class ApiClientTest : MockWebServerTest() {
 
         val response = apiClient.allProducts
 
-        assertEquals(ApiClient.ApiError.NotFoundError.left(), response)
+        assertEquals(ApiError.NotFoundError.left(), response)
     }
 
     @Test
@@ -63,7 +65,10 @@ class ApiClientTest : MockWebServerTest() {
 
         val response = apiClient.allProducts
 
-        assertEquals(NetworkProductsAnswer(emptyList()).right(), response)
+        assertEquals(
+            NetworkProductsAnswer(
+                emptyList()
+            ).right(), response)
     }
 
     @Test
@@ -72,12 +77,28 @@ class ApiClientTest : MockWebServerTest() {
 
         val response = apiClient.allProducts
 
-        assertEquals(ApiClient.ApiError.NetworkError.left(), response)
+        assertEquals(ApiError.NetworkError.left(), response)
     }
 
     private fun expectedResponse(): NetworkProductsAnswer {
-        return NetworkProductsAnswer(listOf(NetworkProduct("VOUCHER", "Cabify Voucher", 5.0),
-            NetworkProduct("TSHIRT", "Cabify T-Shirt", 20.0),
-            NetworkProduct("MUG", "Cabify Coffee Mug", 7.5)))
+        return NetworkProductsAnswer(
+            listOf(
+                NetworkProduct(
+                    "VOUCHER",
+                    "Cabify Voucher",
+                    5.0
+                ),
+                NetworkProduct(
+                    "TSHIRT",
+                    "Cabify T-Shirt",
+                    20.0
+                ),
+                NetworkProduct(
+                    "MUG",
+                    "Cabify Coffee Mug",
+                    7.5
+                )
+            )
+        )
     }
 }

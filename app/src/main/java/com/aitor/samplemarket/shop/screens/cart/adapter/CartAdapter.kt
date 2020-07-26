@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aitor.samplemarket.R
-import com.aitor.samplemarket.cart.model.CartItem
+import com.aitor.samplemarket.domain.model.CartItem
 import com.aitor.samplemarket.common.getPriceString
 import com.aitor.samplemarket.common.inflate
 import com.aitor.samplemarket.common.toInt
-import com.aitor.samplemarket.product.model.Product
+import com.aitor.samplemarket.domain.model.Product
 import kotlinx.android.synthetic.main.layout_cart_item.view.*
 
 class CartAdapter(

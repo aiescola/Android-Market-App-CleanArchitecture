@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 typealias SplashStatusLoading = SplashViewModel.Status.Loading
 typealias SplashStatusLoaded = SplashViewModel.Status.Loaded
 
-class SplashViewModel() : ViewModel() {
+class SplashViewModel : ViewModel() {
 
     sealed class Status {
         object Loading : Status()

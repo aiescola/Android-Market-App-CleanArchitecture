@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aitor.samplemarket.R
-import com.aitor.samplemarket.cart.model.CartItem
+import com.aitor.samplemarket.domain.model.CartItem
 import com.aitor.samplemarket.common.getPriceString
-import com.aitor.samplemarket.product.model.Product
+import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.shop.screens.cart.adapter.CartAdapter
 import kotlinx.android.synthetic.main.fragment_cart.*
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -4,9 +4,7 @@ import arrow.core.Option
 import arrow.core.some
 import com.aitor.samplemarket.BaseTest
 import com.aitor.samplemarket.DiscountMother.PRODUCT_DISCOUNT
-import com.aitor.samplemarket.discount.network.FakeNetworkDiscountDataSource
-import com.aitor.samplemarket.discount.network.NetworkDiscount
-import com.aitor.samplemarket.discount.repository.DiscountRepositoryImpl
+import com.aitor.samplemarket.data.network.datasource.FakeNetworkDiscountDataSource
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
@@ -16,11 +14,14 @@ import org.junit.Test
 class DiscountRepositoryTest : BaseTest() {
 
     private val fakeNetworkDiscountDataSource = mockk<FakeNetworkDiscountDataSource>()
-    private lateinit var discountRepository: DiscountRepositoryImpl
+    private lateinit var discountRepository: com.aitor.samplemarket.data.repository.DiscountRepositoryImpl
 
     @Before
     fun setup() {
-        discountRepository = DiscountRepositoryImpl(fakeNetworkDiscountDataSource)
+        discountRepository =
+            com.aitor.samplemarket.data.repository.DiscountRepositoryImpl(
+                fakeNetworkDiscountDataSource
+            )
     }
 
     @Test
@@ -31,7 +32,7 @@ class DiscountRepositoryTest : BaseTest() {
         assertEquals(expectedDiscount.map { it.asDomainModel() }, testDiscount)
     }
 
-    private fun givenADiscount(): Option<NetworkDiscount> {
+    private fun givenADiscount(): Option<com.aitor.samplemarket.data.network.model.NetworkDiscount> {
         val discount = PRODUCT_DISCOUNT.some()
         every { fakeNetworkDiscountDataSource.all } returns discount
         return discount
