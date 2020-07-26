@@ -43,7 +43,9 @@
         android:visibility="gone"
         />
 
-    <include layout="@layout/layout_error" />
+    <include
+        android:id="@+id/layout_error"
+        layout="@layout/layout_error" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

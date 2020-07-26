@@ -9,12 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aitor.samplemarket.R
 import com.aitor.samplemarket.domain.model.CartItem
 import com.aitor.samplemarket.common.getPriceString
+import com.aitor.samplemarket.databinding.FragmentCartBinding
 import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.shop.screens.cart.adapter.CartAdapter
-import kotlinx.android.synthetic.main.fragment_cart.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -25,6 +24,7 @@ class CartFragment : Fragment() {
 
     private val cartViewModel: CartViewModel by viewModel()
 
+    private lateinit var binding: FragmentCartBinding
     private lateinit var cartAdapter: CartAdapter
 
     private val cartObserver = Observer<List<CartItem>> {
@@ -47,14 +47,15 @@ class CartFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+        binding = FragmentCartBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         cartAdapter = CartAdapter(cartDeleteItemClickListener, cartTextChangedListener)
-        cartViewModel.cartItems.observe(this, cartObserver)
+        cartViewModel.cartItems.observe(viewLifecycleOwner, cartObserver)
 
         setupCartRecyclerView()
     }
@@ -65,7 +66,7 @@ class CartFragment : Fragment() {
     }
 
     private fun setupCartRecyclerView() {
-        cart_recycler_view.apply {
+        binding.cartRecyclerView.apply {
             adapter = cartAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(this.context, RecyclerView.VERTICAL))
@@ -75,6 +76,6 @@ class CartFragment : Fragment() {
     private fun setTotalPriceLabel(it: List<CartItem>) {
         val totalPrice =
             it.map { item -> item.discountedSubtotal ?: item.nonDiscountedSubtotal }.sum()
-        cart_total_price.text = context?.getPriceString(totalPrice)
+        binding.cartTotalPrice.text = context?.getPriceString(totalPrice)
     }
 }

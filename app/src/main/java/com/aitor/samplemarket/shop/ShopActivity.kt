@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.aitor.samplemarket.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.aitor.samplemarket.databinding.ActivityShopBinding
 
 /**
  * Simple activity with a bottom navigation view and two fragments (one for the product list,
@@ -15,13 +15,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  */
 class ShopActivity : AppCompatActivity() {
 
+
+    private lateinit var binding: ActivityShopBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shop)
+        binding = ActivityShopBinding.inflate(layoutInflater)
 
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        setContentView(binding.root)
+
         val navController = findNavController(R.id.navigation_controller)
-
-        NavigationUI.setupWithNavController(navView, navController)
+        NavigationUI.setupWithNavController(binding.navView, navController)
     }
 }

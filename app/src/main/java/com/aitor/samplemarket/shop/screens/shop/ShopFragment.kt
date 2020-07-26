@@ -17,12 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aitor.samplemarket.R
 import com.aitor.samplemarket.common.showToast
+import com.aitor.samplemarket.databinding.FragmentShopBinding
+import com.aitor.samplemarket.databinding.LayoutErrorBinding
 import com.aitor.samplemarket.domain.model.Discount
 import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.shop.screens.shop.adapter.ProductAdapter
-import kotlinx.android.synthetic.main.fragment_shop.*
-import kotlinx.android.synthetic.main.layout_discount.*
-import kotlinx.android.synthetic.main.layout_error.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -34,6 +33,8 @@ import timber.log.Timber
 class ShopFragment : Fragment() {
 
     private val shopViewModel: ShopViewModel by viewModel()
+    private lateinit var binding: FragmentShopBinding
+    private lateinit var errorLayoutBinding: LayoutErrorBinding
 
     private var isStatusLoading = false
     private lateinit var productAdapter: ProductAdapter
@@ -69,7 +70,9 @@ class ShopFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_shop, container, false)
+        binding = FragmentShopBinding.inflate(inflater, container, false)
+        errorLayoutBinding = binding.layoutError
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,8 +81,8 @@ class ShopFragment : Fragment() {
 
         productAdapter = ProductAdapter(productBuyClickListener)
 
-        shopViewModel.productStatus.observe(this, shopStatusObserver)
-        shopViewModel.discount.observe(this, discountObserver)
+        shopViewModel.productStatus.observe(viewLifecycleOwner, shopStatusObserver)
+        shopViewModel.discount.observe(viewLifecycleOwner, discountObserver)
 
         setupProductsRecyclerView()
         setupSearchBar()
@@ -93,7 +96,7 @@ class ShopFragment : Fragment() {
     }
 
     private fun setupProductsRecyclerView() {
-        product_container.apply {
+        binding.productContainer.apply {
             setHasFixedSize(true)
             adapter = productAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -102,7 +105,7 @@ class ShopFragment : Fragment() {
     }
 
     private fun setupSearchBar() {
-        search_filter.addTextChangedListener(object : TextWatcher {
+        binding.searchFilter.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -115,23 +118,28 @@ class ShopFragment : Fragment() {
 
     private fun onLoading() {
         Timber.d("Status loading")
-        error_text.visibility = View.GONE
-        error_refresh.visibility = View.GONE
 
-        product_container.visibility = View.GONE
-        search_filter.visibility = View.GONE
+        with(binding) {
+            errorLayoutBinding.errorText.visibility = View.GONE
+            errorLayoutBinding.errorRefresh.visibility = View.GONE
+            productContainer.visibility = View.GONE
+            searchFilter.visibility = View.GONE
 
-        progress_bar.visibility = View.VISIBLE
+            progressBar.visibility = View.VISIBLE
+        }
     }
 
     private fun onProductsLoaded(products: List<Product>) {
         Timber.d("Page loaded. Products: $products")
-        error_text.visibility = View.GONE
-        error_refresh.visibility = View.GONE
-        progress_bar.visibility = View.GONE
 
-        product_container.visibility = View.VISIBLE
-        search_filter.visibility = View.VISIBLE
+        with(binding) {
+            errorLayoutBinding.errorText.visibility = View.GONE
+            errorLayoutBinding.errorRefresh.visibility = View.GONE
+            progressBar.visibility = View.GONE
+
+            searchFilter.visibility = View.VISIBLE
+            productContainer.visibility = View.VISIBLE
+        }
 
         productAdapter.submitList(products)
     }
@@ -139,19 +147,21 @@ class ShopFragment : Fragment() {
     private fun showErrorScreen() {
         val errorMsg = getString(R.string.error_loading_products)
         Timber.d("Error. message: $errorMsg")
-        error_text.apply {
-            text = errorMsg
-            visibility = View.VISIBLE
-        }
-        error_refresh.apply {
-            setOnClickListener { shopViewModel.loadData() }
-            visibility = View.VISIBLE
-        }
+        with(binding) {
+            errorLayoutBinding.errorText.apply {
+                text = errorMsg
+                visibility = View.VISIBLE
+            }
+            errorLayoutBinding.errorRefresh.apply {
+                setOnClickListener { shopViewModel.loadData() }
+                visibility = View.VISIBLE
+            }
 
-        progress_bar.visibility = View.GONE
-        search_filter.visibility = View.GONE
-        layout_discount.visibility = View.GONE
-        product_container.visibility = View.GONE
+            progressBar.visibility = View.GONE
+            searchFilter.visibility = View.GONE
+            layoutDiscount.layoutDiscount.visibility = View.GONE
+            productContainer.visibility = View.GONE
+        }
     }
 
     private fun showDiscountsLayout(discount: Discount) {
@@ -159,12 +169,14 @@ class ShopFragment : Fragment() {
         val s = "${discount.name} ${discount.description}".toSpannable()
         s[0, discount.name.length] = StyleSpan(Typeface.BOLD_ITALIC)
 
-        discount_description.text = s
-        layout_discount.visibility = View.VISIBLE
+        binding.layoutDiscount.apply {
+            discountDescription.text = s
+            layoutDiscount.visibility = View.VISIBLE
+        }
     }
 
     private fun hideDiscountsLayout() {
         Timber.d("Hide discount layout")
-        layout_discount.visibility = View.GONE
+        binding.layoutDiscount.layoutDiscount.visibility = View.GONE
     }
 }

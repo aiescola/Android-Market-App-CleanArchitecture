@@ -1,5 +1,6 @@
 package com.aitor.samplemarket.shop.screens.cart.adapter
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -7,13 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.aitor.samplemarket.R
 import com.aitor.samplemarket.domain.model.CartItem
 import com.aitor.samplemarket.common.getPriceString
-import com.aitor.samplemarket.common.inflate
 import com.aitor.samplemarket.common.toInt
+import com.aitor.samplemarket.databinding.LayoutCartItemBinding
 import com.aitor.samplemarket.domain.model.Product
-import kotlinx.android.synthetic.main.layout_cart_item.view.*
 
 class CartAdapter(
     private val deleteClickListener: (Product) -> Unit,
@@ -21,7 +20,8 @@ class CartAdapter(
 ) : ListAdapter<CartItem, CartAdapter.CartItemViewHolder>(CartItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartItemViewHolder {
-        return CartItemViewHolder(parent.inflate(R.layout.layout_cart_item))
+        val binding = LayoutCartItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CartItemViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CartItemViewHolder, position: Int) {
@@ -29,23 +29,23 @@ class CartAdapter(
         holder.bind(item)
     }
 
-    inner class CartItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    inner class CartItemViewHolder(private val binding: LayoutCartItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(cartItem: CartItem) {
-            with(view) {
-                item_name.text = cartItem.product.name
+            with(binding) {
+                itemName.text = cartItem.product.name
 
                 setupPriceLabels(cartItem.nonDiscountedSubtotal, cartItem.discountedSubtotal)
                 setupAmountLabel(cartItem.amount, cartItem.product)
 
-                delete_button.setOnClickListener {
+                deleteButton.setOnClickListener {
                     deleteClickListener(cartItem.product)
                 }
             }
         }
 
         private fun setupAmountLabel(amountInt: Int, product: Product) {
-            with(view) {
+            with(binding) {
                 amount.setText(amountInt.toString(), TextView.BufferType.EDITABLE)
                 amount.setOnEditorActionListener { _, actionId, _ ->
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -57,14 +57,14 @@ class CartAdapter(
         }
 
         private fun setupPriceLabels(nonDiscountedSubtotal: Double, subtotal: Double?) {
-            with(view) {
-                item_price.text = context.getPriceString(nonDiscountedSubtotal)
+            with(binding) {
+                itemPrice.text = root.context.getPriceString(nonDiscountedSubtotal)
 
                 if (subtotal == null) {
-                    view.item_final_price.visibility = View.GONE
+                    binding.itemFinalPrice.visibility = View.GONE
                 } else {
-                    item_final_price.text = context.getPriceString(subtotal)
-                    item_final_price.visibility = View.VISIBLE
+                    itemFinalPrice.text = root.context.getPriceString(subtotal)
+                    itemFinalPrice.visibility = View.VISIBLE
                 }
             }
         }

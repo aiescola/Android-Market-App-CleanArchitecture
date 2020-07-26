@@ -3,6 +3,7 @@ package com.aitor.samplemarket.shop.screens.shop.adapter
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -11,17 +12,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aitor.samplemarket.R
 import com.aitor.samplemarket.common.getPriceString
-import com.aitor.samplemarket.common.inflate
 import com.aitor.samplemarket.common.toInt
+import com.aitor.samplemarket.databinding.LayoutProductBinding
 import com.aitor.samplemarket.domain.model.Product
-import kotlinx.android.synthetic.main.layout_product.view.*
 import timber.log.Timber
 
 class ProductAdapter(private val productClickListener: (Product, Int) -> Unit) :
     ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        return ProductViewHolder(parent.inflate(R.layout.layout_product))
+        val binding = LayoutProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ProductViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
@@ -29,12 +30,12 @@ class ProductAdapter(private val productClickListener: (Product, Int) -> Unit) :
         holder.bind(item)
     }
 
-    inner class ProductViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    inner class ProductViewHolder(private val binding: LayoutProductBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
-            with(view) {
-                product_name.text = product.name
-                product_price.text = context.getPriceString(product.price)
+            with(binding) {
+                productName.text = product.name
+                productPrice.text = root.context.getPriceString(product.price)
                 if (product.hasDiscount) {
                     Timber.d("setupDiscountedView")
                     setupDiscountedView(product)
@@ -49,64 +50,66 @@ class ProductAdapter(private val productClickListener: (Product, Int) -> Unit) :
         }
 
         private fun setupDiscountedView(product: Product) {
-            with(view) {
+            with(binding) {
                 if (product.discountedPrice != null) {
-                    product_final_price.visibility = View.VISIBLE
-                    product_final_price.text = context.getPriceString(product.discountedPrice!!)
-                    product_price.paintFlags = STRIKE_THRU_TEXT_FLAG
+                    productFinalPrice.visibility = View.VISIBLE
+                    productFinalPrice.text = root.context.getPriceString(product.discountedPrice!!)
+                    productPrice.paintFlags = STRIKE_THRU_TEXT_FLAG
                 }
 
-                product_name.setTextColor(context.getColor(R.color.colorAccent))
+                productName.setTextColor(root.context.getColor(R.color.colorAccent))
             }
         }
 
         private fun setupNormalView() {
-            with(view) {
-                product_final_price.visibility = View.GONE
-                product_price.paintFlags = product_price.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
-                product_name.setTextColor(context.getColor(R.color.softBlack))
+            with(binding) {
+                productFinalPrice.visibility = View.GONE
+                productPrice.paintFlags = productPrice.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
+                productName.setTextColor(root.context.getColor(R.color.softBlack))
             }
         }
 
         private fun setupBuyAmountBox(product: Product) {
-            view.buy_amount.apply {
-                setOnEditorActionListener { _, actionId, _ ->
-                    val amountInt = buy_amount.toInt()
-                    if (amountInt > 0 && actionId == EditorInfo.IME_ACTION_DONE) {
-                        submitAmount(product, amountInt)
-                    }
-                    false
-                }
-                addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable) {}
-
-                    override fun beforeTextChanged(
-                        s: CharSequence, start: Int, count: Int, after: Int
-                    ) {
-                    }
-
-                    override fun onTextChanged(
-                        s: CharSequence, start: Int, before: Int, count: Int
-                    ) {
-                        view.buy_button.visibility = if (s == "") {
-                            View.GONE
-                        } else {
-                            View.VISIBLE
+            with(binding) {
+                buyAmount.apply {
+                    setOnEditorActionListener { _, actionId, _ ->
+                        val amountInt = buyAmount.toInt()
+                        if (amountInt > 0 && actionId == EditorInfo.IME_ACTION_DONE) {
+                            submitAmount(product, amountInt)
                         }
+                        false
                     }
-                })
-                setOnFocusChangeListener { _, hasFocus ->
-                    if (!hasFocus && view.buy_amount.toInt() == 0) {
-                        view.buy_button.visibility = View.GONE
+                    addTextChangedListener(object : TextWatcher {
+                        override fun afterTextChanged(s: Editable) {}
+
+                        override fun beforeTextChanged(
+                            s: CharSequence, start: Int, count: Int, after: Int
+                        ) {
+                        }
+
+                        override fun onTextChanged(
+                            s: CharSequence, start: Int, before: Int, count: Int
+                        ) {
+                            buyButton.visibility = if (s == "") {
+                                View.GONE
+                            } else {
+                                View.VISIBLE
+                            }
+                        }
+                    })
+                    setOnFocusChangeListener { _, hasFocus ->
+                        if (!hasFocus && buyAmount.toInt() == 0) {
+                            buyButton.visibility = View.GONE
+                        }
                     }
                 }
             }
         }
 
         private fun setupBuyButton(product: Product) {
-            with(view) {
-                buy_button.setOnClickListener {
-                    val amountInt = buy_amount.toInt()
+            with(binding) {
+                buyButton.setOnClickListener {
+                    val amountInt = buyAmount.toInt()
                     if (amountInt > 0) {
                         submitAmount(product, amountInt)
                     }
@@ -116,8 +119,8 @@ class ProductAdapter(private val productClickListener: (Product, Int) -> Unit) :
 
         private fun submitAmount(product: Product, amountInt: Int) {
             productClickListener(product, amountInt)
-            view.buy_amount.text.clear()
-            view.buy_button.visibility = View.GONE
+            binding.buyAmount.text.clear()
+            binding.buyButton.visibility = View.GONE
         }
     }
 }
