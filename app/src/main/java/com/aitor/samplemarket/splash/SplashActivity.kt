@@ -2,15 +2,18 @@ package com.aitor.samplemarket.splash
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.aitor.samplemarket.shop.ShopActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
-    private val splashViewModel: SplashViewModel by viewModel()
+    //private val splashViewModel: SplashViewModel by viewModel()
+    private val splashViewModel: SplashViewModel by viewModels()
 
     private val statusObserver = Observer<SplashViewModel.Status> {
         when (it) {

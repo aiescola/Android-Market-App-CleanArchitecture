@@ -5,7 +5,7 @@ import com.aitor.samplemarket.domain.model.Discount
 import com.aitor.samplemarket.data.network.datasource.TypeNetworkDiscountDataSource
 import com.aitor.samplemarket.domain.repository.DiscountRepository
 
-class DiscountRepositoryImpl(private val networkDiscountDataSource: com.aitor.samplemarket.data.network.datasource.TypeNetworkDiscountDataSource) :
+class DiscountRepositoryImpl(private val networkDiscountDataSource: TypeNetworkDiscountDataSource) :
     DiscountRepository {
 
     override fun fetchDiscounts(): Option<Discount> {

@@ -1,25 +1,26 @@
 package com.aitor.samplemarket.shop.screens.cart
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.Option
 import com.aitor.samplemarket.domain.model.CartItem
+import com.aitor.samplemarket.domain.model.Discount
+import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.domain.usecase.DeleteCartItem
 import com.aitor.samplemarket.domain.usecase.FetchCartItems
-import com.aitor.samplemarket.domain.usecase.UpdateCartItem
-import com.aitor.samplemarket.domain.model.Discount
 import com.aitor.samplemarket.domain.usecase.FetchDiscounts
-import com.aitor.samplemarket.domain.model.Product
+import com.aitor.samplemarket.domain.usecase.UpdateCartItem
 import kotlinx.coroutines.launch
 
-class CartViewModel(
+class CartViewModel @ViewModelInject constructor(
     private val fetchDiscounts: FetchDiscounts,
     private val fetchCartItems: FetchCartItems,
     private val updateCartItem: UpdateCartItem,
-    private val deleteCartItem: DeleteCartItem
-) : ViewModel() {
+    private val deleteCartItem: DeleteCartItem) : ViewModel() {
+
 
     private lateinit var discount: Option<Discount>
     private val _cartItems: MutableLiveData<List<CartItem>> = MutableLiveData()

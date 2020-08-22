@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,15 +15,17 @@ import com.aitor.samplemarket.common.getPriceString
 import com.aitor.samplemarket.databinding.FragmentCartBinding
 import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.shop.screens.cart.adapter.CartAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * This screen displays the cart view with each product and the final price.
  * The user can update the amount of items of a certain product or delete it from the cart.
  */
+@AndroidEntryPoint
 class CartFragment : Fragment() {
 
-    private val cartViewModel: CartViewModel by viewModel()
+  //  private val cartViewModel: CartViewModel by viewModel()
+    private val cartViewModel: CartViewModel by viewModels()
 
     private lateinit var binding: FragmentCartBinding
     private lateinit var cartAdapter: CartAdapter
