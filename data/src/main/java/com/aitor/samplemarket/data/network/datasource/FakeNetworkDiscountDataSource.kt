@@ -4,18 +4,14 @@ import arrow.core.None
 import arrow.core.Option
 import arrow.core.some
 import com.aitor.samplemarket.data.network.model.NetworkDiscount
-import com.aitor.samplemarket.domain.model.DataSource
 import com.aitor.samplemarket.domain.model.DiscountType
 import java.util.*
+import javax.inject.Inject
 
-typealias TypeNetworkDiscountDataSource = DataSource<Option<NetworkDiscount>>
-
-class FakeNetworkDiscountDataSource :
-    TypeNetworkDiscountDataSource {
+class FakeNetworkDiscountDataSource @Inject constructor() {
     private val discount = if (Random().nextBoolean()) randomDiscount.some() else None
 
-    override val all: Option<NetworkDiscount>
-        get() = discount
+    val all: Option<NetworkDiscount> get() = discount
 }
 
 private val randomDiscount: NetworkDiscount

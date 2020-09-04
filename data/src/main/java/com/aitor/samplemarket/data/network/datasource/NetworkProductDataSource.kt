@@ -4,13 +4,9 @@ import arrow.core.Either
 import com.aitor.samplemarket.data.network.ApiClient
 import com.aitor.samplemarket.data.network.model.NetworkProductsAnswer
 import com.aitor.samplemarket.domain.model.ApiError
-import com.aitor.samplemarket.domain.model.DataSource
+import javax.inject.Inject
 
-typealias TypeNetworkProductDataSource = DataSource<Either<ApiError, NetworkProductsAnswer>>
+class NetworkProductDataSource @Inject constructor(private val apiClient: ApiClient) {
 
-class NetworkProductDataSource(private val apiClient: ApiClient) :
-    TypeNetworkProductDataSource {
-
-    override val all: Either<ApiError, NetworkProductsAnswer>
-        get() = apiClient.allProducts
+    val all: Either<ApiError, NetworkProductsAnswer> get() = apiClient.allProducts
 }

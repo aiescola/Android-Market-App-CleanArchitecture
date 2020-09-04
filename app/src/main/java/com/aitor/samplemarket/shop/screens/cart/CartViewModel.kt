@@ -19,8 +19,8 @@ class CartViewModel @ViewModelInject constructor(
     private val fetchDiscounts: FetchDiscounts,
     private val fetchCartItems: FetchCartItems,
     private val updateCartItem: UpdateCartItem,
-    private val deleteCartItem: DeleteCartItem) : ViewModel() {
-
+    private val deleteCartItem: DeleteCartItem
+) : ViewModel() {
 
     private lateinit var discount: Option<Discount>
     private val _cartItems: MutableLiveData<List<CartItem>> = MutableLiveData()
