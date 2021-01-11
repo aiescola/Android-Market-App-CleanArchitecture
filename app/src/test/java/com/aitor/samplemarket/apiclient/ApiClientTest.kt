@@ -20,7 +20,7 @@ class ApiClientTest : MockWebServerTest() {
         super.setUp()
         val mockWebServerEndpoint = baseEndpoint
         apiClient =
-            ApiClient(mockWebServerEndpoint)
+            ApiClient(mockWebServerEndpoint, false)
     }
 
     @Test

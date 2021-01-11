@@ -1,27 +1,30 @@
 package com.aitor.samplemarket.shop.screens.cart
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import arrow.core.Either
 import arrow.core.Option
+import com.aitor.samplemarket.domain.model.ApiError
 import com.aitor.samplemarket.domain.model.CartItem
+import com.aitor.samplemarket.domain.model.Discount
+import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.domain.usecase.DeleteCartItem
 import com.aitor.samplemarket.domain.usecase.FetchCartItems
-import com.aitor.samplemarket.domain.usecase.UpdateCartItem
-import com.aitor.samplemarket.domain.model.Discount
 import com.aitor.samplemarket.domain.usecase.FetchDiscounts
-import com.aitor.samplemarket.domain.model.Product
+import com.aitor.samplemarket.domain.usecase.UpdateCartItem
 import kotlinx.coroutines.launch
 
-class CartViewModel(
+class CartViewModel @ViewModelInject constructor(
     private val fetchDiscounts: FetchDiscounts,
     private val fetchCartItems: FetchCartItems,
     private val updateCartItem: UpdateCartItem,
-    private val deleteCartItem: DeleteCartItem
-) : ViewModel() {
+    private val deleteCartItem: DeleteCartItem) : ViewModel() {
 
-    private lateinit var discount: Option<Discount>
+
+    private lateinit var discount: Either<ApiError, Discount>
     private val _cartItems: MutableLiveData<List<CartItem>> = MutableLiveData()
     val cartItems: LiveData<List<CartItem>>
         get() = _cartItems
@@ -49,15 +52,15 @@ class CartViewModel(
 
     private fun loadCartItems() {
         val cartItems = fetchCartItems()
-        val cartItemsWithDiscounts = discount.fold(ifSome = { disc ->
+        val cartItemsWithDiscounts = discount.fold(ifLeft = {
+            cartItems
+        }, ifRight = {discount ->
             cartItems.map {
-                if (disc.codes.contains(it.product.code)) {
-                    it.applyDiscount(disc)
+                if (discount.codes.contains(it.product.code)) {
+                    it.applyDiscount(discount)
                 }
                 it
             }
-        }, ifEmpty = {
-            cartItems
         })
 
         _cartItems.postValue(cartItemsWithDiscounts)

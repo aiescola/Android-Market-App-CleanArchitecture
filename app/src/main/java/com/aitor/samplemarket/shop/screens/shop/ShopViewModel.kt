@@ -1,15 +1,14 @@
 package com.aitor.samplemarket.shop.screens.shop
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import arrow.core.None
-import arrow.core.Some
-import com.aitor.samplemarket.domain.usecase.AddItemToCart
 import com.aitor.samplemarket.domain.model.Discount
-import com.aitor.samplemarket.domain.usecase.FetchDiscounts
 import com.aitor.samplemarket.domain.model.Product
+import com.aitor.samplemarket.domain.usecase.AddItemToCart
+import com.aitor.samplemarket.domain.usecase.FetchDiscounts
 import com.aitor.samplemarket.domain.usecase.FetchProducts
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +18,7 @@ typealias ShopStatusLoading = ShopViewModel.ProductStatus.Loading
 typealias ShopStatusLoaded = ShopViewModel.ProductStatus.Loaded
 typealias ShopStatusFailure = ShopViewModel.ProductStatus.Failure
 
-class ShopViewModel(
+class ShopViewModel @ViewModelInject constructor(
     private val fetchProducts: FetchProducts,
     private val fetchDiscounts: FetchDiscounts,
     private val addItemToCart: AddItemToCart
@@ -49,16 +48,14 @@ class ShopViewModel(
             val discount = withContext(Dispatchers.IO) { fetchDiscounts() }
             products.fold(ifLeft = {
                 _productStatus.postValue(ProductStatus.Failure)
-            }, ifRight = {
-                when (discount) {
-                    is Some -> {
-                        it.applyDiscount(discount.t)
-                        _discount.postValue(discount.t)
-                    }
-                    is None -> _discount.postValue(null)
-                }
-
-                _productStatus.postValue(ProductStatus.Loaded(it))
+            }, ifRight = { products ->
+                discount.bimap(leftOperation = {
+                    _discount.postValue(null)
+                }, rightOperation = { discount ->
+                    products.applyDiscount(discount)
+                    _discount.postValue(discount)
+                })
+                _productStatus.postValue(ProductStatus.Loaded(products))
             })
         }
     }
