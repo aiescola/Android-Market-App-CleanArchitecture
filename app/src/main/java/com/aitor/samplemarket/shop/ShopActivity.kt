@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.aitor.samplemarket.R
 import com.aitor.samplemarket.databinding.ActivityShopBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Simple activity with a bottom navigation view and two fragments (one for the product list,
@@ -13,8 +14,8 @@ import com.aitor.samplemarket.databinding.ActivityShopBinding
  *
  * Navigation through fragments is implemented through Jetpack's Navigation module.
  */
+@AndroidEntryPoint
 class ShopActivity : AppCompatActivity() {
-
 
     private lateinit var binding: ActivityShopBinding
 

@@ -3,8 +3,9 @@ package com.aitor.samplemarket.data.repository
 import com.aitor.samplemarket.domain.model.CartItem
 import com.aitor.samplemarket.domain.repository.CartRepository
 import com.aitor.samplemarket.domain.model.Product
+import javax.inject.Inject
 
-class CartRepositoryImpl : CartRepository {
+class CartRepositoryImpl @Inject constructor(): CartRepository {
     private val hmCartItems = hashMapOf<String, CartItem>()
 
     override val cartItems: List<CartItem>

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +23,7 @@ import com.aitor.samplemarket.databinding.LayoutErrorBinding
 import com.aitor.samplemarket.domain.model.Discount
 import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.shop.screens.shop.adapter.ProductAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 /**
@@ -30,9 +31,11 @@ import timber.log.Timber
  * the desired amount of each. It also features a filter box for easier
  * navigation with a big list.
  */
+@AndroidEntryPoint
 class ShopFragment : Fragment() {
 
-    private val shopViewModel: ShopViewModel by viewModel()
+    private val shopViewModel: ShopViewModel by viewModels()
+
     private lateinit var binding: FragmentShopBinding
     private lateinit var errorLayoutBinding: LayoutErrorBinding
 

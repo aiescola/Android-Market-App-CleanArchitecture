@@ -8,7 +8,7 @@ import com.aitor.samplemarket.data.network.model.NetworkProductsAnswer
 
 object DiscountMother {
     val PRODUCT_DISCOUNT =
-        com.aitor.samplemarket.data.network.model.NetworkDiscount(
+        NetworkDiscount(
             "DISCOUNT",
             DiscountType.PRODUCT.value,
             "PRODUCT_DISCOUNT",
@@ -17,7 +17,7 @@ object DiscountMother {
             99.99
         )
     val BULK_DISCOUNT =
-        com.aitor.samplemarket.data.network.model.NetworkDiscount(
+        NetworkDiscount(
             "DISCOUNT",
             DiscountType.BULK.value,
             "PRODUCT_DISCOUNT",
@@ -27,7 +27,7 @@ object DiscountMother {
             pct = 9
         )
     val PROMOTION_DISCOUNT =
-        com.aitor.samplemarket.data.network.model.NetworkDiscount(
+        NetworkDiscount(
             "DISCOUNT",
             DiscountType.PROMOTION.value,
             "PRODUCT_DISCOUNT",
@@ -49,9 +49,9 @@ object ProductMother {
     )
 
     val PRODUCTS_UPDATE =
-        com.aitor.samplemarket.data.network.model.NetworkProductsAnswer(
+        NetworkProductsAnswer(
             listOf(
-                com.aitor.samplemarket.data.network.model.NetworkProduct(
+                NetworkProduct(
                     "PRODUCT_TEST_ID",
                     "mock1",
                     5.0
@@ -62,12 +62,12 @@ object ProductMother {
 
 object NetworkProductMother {
     val networkProducts = listOf(
-        com.aitor.samplemarket.data.network.model.NetworkProduct(
+        NetworkProduct(
             "test code",
             "test name",
             3.0
         ),
-        com.aitor.samplemarket.data.network.model.NetworkProduct(
+        NetworkProduct(
             "test code 2",
             "test name 2",
             4.0

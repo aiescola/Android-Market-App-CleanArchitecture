@@ -1,5 +1,6 @@
 package com.aitor.samplemarket.usecase
 
+import arrow.core.right
 import arrow.core.some
 import com.aitor.samplemarket.DiscountMother.PRODUCT_DISCOUNT
 import com.aitor.samplemarket.domain.model.Discount
@@ -29,13 +30,13 @@ class FetchDiscountTest {
 
         val testDiscount = fetchDiscounts()
 
-        assertEquals(expectedDiscount.some(), testDiscount)
+        assertEquals(expectedDiscount.right(), testDiscount)
     }
 
     private fun givenOneDiscount(): Discount {
         val discount = PRODUCT_DISCOUNT.asDomainModel()
 
-        every { discountRepository.fetchDiscounts() } returns discount.some()
+        every { discountRepository.fetchDiscounts() } returns discount.right()
 
         return discount
     }

@@ -2,7 +2,7 @@ package com.aitor.samplemarket.repository
 
 import arrow.core.right
 import com.aitor.samplemarket.NetworkProductMother
-import com.aitor.samplemarket.data.network.datasource.TypeNetworkProductDataSource
+import com.aitor.samplemarket.data.network.datasource.NetworkProductDataSource
 import com.aitor.samplemarket.data.network.model.NetworkProductsAnswer
 import com.aitor.samplemarket.data.repository.ProductRepositoryImpl
 import com.aitor.samplemarket.domain.repository.ProductRepository
@@ -14,7 +14,7 @@ import org.junit.Test
 
 class ProductRepositoryTest {
 
-    private val mockNetworkProductDataSource = mockk<TypeNetworkProductDataSource>()
+    private val mockNetworkProductDataSource = mockk<NetworkProductDataSource>()
     private lateinit var productRepository: ProductRepository
 
     @Before

@@ -1,5 +1,6 @@
 package com.aitor.samplemarket.splash
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +11,7 @@ import kotlinx.coroutines.launch
 typealias SplashStatusLoading = SplashViewModel.Status.Loading
 typealias SplashStatusLoaded = SplashViewModel.Status.Loaded
 
-class SplashViewModel : ViewModel() {
+class SplashViewModel @ViewModelInject constructor() : ViewModel() {
 
     sealed class Status {
         object Loading : Status()
