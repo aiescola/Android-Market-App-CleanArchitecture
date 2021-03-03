@@ -1,23 +1,21 @@
 package com.aitor.samplemarket.base.di
 
-import android.content.Context
 import com.aitor.samplemarket.BuildConfig
 import com.aitor.samplemarket.data.network.ApiClient
-import com.aitor.samplemarket.data.repository.CartRepositoryImpl
-import com.aitor.samplemarket.data.repository.DiscountRepositoryImpl
-import com.aitor.samplemarket.data.repository.ProductRepositoryImpl
+import com.aitor.samplemarket.data.repository.*
 import com.aitor.samplemarket.domain.repository.CartRepository
 import com.aitor.samplemarket.domain.repository.DiscountRepository
 import com.aitor.samplemarket.domain.repository.ProductRepository
+import com.aitor.samplemarket.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object ApiModule {
     @Provides
     fun providesApiClient(): ApiClient {
@@ -26,13 +24,8 @@ object ApiModule {
 }
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-    @Binds
-    @Singleton
-    abstract fun bindsProductRepository(
-        productRepositoryImpl: ProductRepositoryImpl
-    ): ProductRepository
 
     @Binds
     @Singleton
@@ -45,4 +38,6 @@ abstract class RepositoryModule {
     abstract fun bindsCartRepository(
         cartRepositoryImpl: CartRepositoryImpl
     ): CartRepository
+
 }
+

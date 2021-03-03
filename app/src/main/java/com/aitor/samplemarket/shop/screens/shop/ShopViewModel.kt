@@ -1,6 +1,5 @@
 package com.aitor.samplemarket.shop.screens.shop
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,15 +9,18 @@ import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.domain.usecase.AddItemToCart
 import com.aitor.samplemarket.domain.usecase.FetchDiscounts
 import com.aitor.samplemarket.domain.usecase.FetchProducts
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 typealias ShopStatusLoading = ShopViewModel.ProductStatus.Loading
 typealias ShopStatusLoaded = ShopViewModel.ProductStatus.Loaded
 typealias ShopStatusFailure = ShopViewModel.ProductStatus.Failure
 
-class ShopViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ShopViewModel @Inject constructor(
     private val fetchProducts: FetchProducts,
     private val fetchDiscounts: FetchDiscounts,
     private val addItemToCart: AddItemToCart

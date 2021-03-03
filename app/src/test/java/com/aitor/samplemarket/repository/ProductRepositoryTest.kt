@@ -1,7 +1,7 @@
 package com.aitor.samplemarket.repository
 
 import arrow.core.right
-import com.aitor.samplemarket.NetworkProductMother
+import com.aitor.samplemarket.NetworkProductObjectMother
 import com.aitor.samplemarket.data.network.datasource.NetworkProductDataSource
 import com.aitor.samplemarket.data.network.model.NetworkProductsAnswer
 import com.aitor.samplemarket.data.repository.ProductRepositoryImpl
@@ -36,7 +36,7 @@ class ProductRepositoryTest {
     private fun givenANetworkProductAnswer(): NetworkProductsAnswer {
         val networkProductAnswer =
             NetworkProductsAnswer(
-                NetworkProductMother.networkProducts
+                NetworkProductObjectMother.networkProducts
             )
         every { mockNetworkProductDataSource.all } returns networkProductAnswer.right()
         return networkProductAnswer

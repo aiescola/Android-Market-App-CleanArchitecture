@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Shopify</string>
+    <string name="app_name"></string>
 
     <string name="title_buy">Buy</string>
     <string name="title_cart">Cart</string>
+    <string name="title_account">Account</string>
 
     <string name="filter">Filter</string>
 
@@ -13,4 +14,6 @@
     <string name="product">Product</string>
     <string name="total_dots">Total:</string>
     <string name="subtotal">Subtotal</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

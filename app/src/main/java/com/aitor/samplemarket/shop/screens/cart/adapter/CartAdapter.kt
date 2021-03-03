@@ -8,10 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.aitor.samplemarket.domain.model.CartItem
 import com.aitor.samplemarket.common.getPriceString
 import com.aitor.samplemarket.common.toInt
 import com.aitor.samplemarket.databinding.LayoutCartItemBinding
+import com.aitor.samplemarket.domain.model.CartItem
 import com.aitor.samplemarket.domain.model.Product
 
 class CartAdapter(

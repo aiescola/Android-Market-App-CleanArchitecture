@@ -1,3 +1,5 @@
+include ':free'
+include ':pro'
 include ':data'
 include ':domain'
 include ':app'

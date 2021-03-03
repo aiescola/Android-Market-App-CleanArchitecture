@@ -8,9 +8,9 @@
               android:name="com.aitor.samplemarket.shop.screens.shop.ShopFragment"
               android:label="fragment_shop" tools:layout="@layout/fragment_shop">
 
-        <action android:id="@+id/action_shopFragment_to_cartFragment"
-                app:destination="@id/cartFragment"
-        />
+        <action
+            android:id="@+id/action_shopFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
 
     <fragment android:id="@+id/cartFragment" android:name="com.aitor.samplemarket.shop.screens.cart.CartFragment"

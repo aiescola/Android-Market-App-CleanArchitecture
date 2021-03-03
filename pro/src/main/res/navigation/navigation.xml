@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/navigation.xml"
+            app:startDestination="@id/shopFragment">
+
+    <fragment android:id="@+id/shopFragment"
+              android:name="com.aitor.samplemarket.shop.screens.shop.ShopFragment"
+              android:label="fragment_shop" tools:layout="@layout/fragment_shop">
+
+        <action android:id="@+id/action_shopFragment_to_cartFragment"
+                app:destination="@id/cartFragment"
+        />
+        <action
+            android:id="@+id/action_shopFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+
+    <fragment android:id="@+id/cartFragment" android:name="com.aitor.samplemarket.shop.screens.cart.CartFragment"
+              android:label="fragment_cart" tools:layout="@layout/fragment_cart">
+        <action android:id="@+id/action_cartFragment_to_shopFragment2"
+                app:destination="@id/shopFragment"
+        />
+        <action
+            android:id="@+id/action_cartFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+
+    <fragment android:id="@+id/accountFragment" android:name="com.aitor.samplemarket.shop.screens.account.AccountFragment"
+        android:label="fragment_account" tools:layout="@layout/fragment_account">
+        <action android:id="@+id/action_cartFragment_to_shopFragment2"
+            app:destination="@id/shopFragment"
+            />
+        <action
+            android:id="@+id/action_accountFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
+</navigation>

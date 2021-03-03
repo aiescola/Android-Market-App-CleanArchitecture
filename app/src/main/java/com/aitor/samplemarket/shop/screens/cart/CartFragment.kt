@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aitor.samplemarket.domain.model.CartItem
 import com.aitor.samplemarket.common.getPriceString
 import com.aitor.samplemarket.databinding.FragmentCartBinding
+import com.aitor.samplemarket.domain.model.CartItem
 import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.shop.screens.cart.adapter.CartAdapter
 import dagger.hilt.android.AndroidEntryPoint

@@ -7,4 +7,5 @@ import com.aitor.samplemarket.domain.model.Product
 interface ProductRepository {
 
     fun fetchProducts(): Either<ApiError, List<Product>>
+
 }
