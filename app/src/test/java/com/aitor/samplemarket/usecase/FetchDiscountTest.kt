@@ -1,8 +1,7 @@
 package com.aitor.samplemarket.usecase
 
 import arrow.core.right
-import arrow.core.some
-import com.aitor.samplemarket.DiscountMother.PRODUCT_DISCOUNT
+import com.aitor.samplemarket.DiscountObjectMother.PRODUCT_DISCOUNT
 import com.aitor.samplemarket.domain.model.Discount
 import com.aitor.samplemarket.domain.repository.DiscountRepository
 import com.aitor.samplemarket.domain.usecase.FetchDiscounts

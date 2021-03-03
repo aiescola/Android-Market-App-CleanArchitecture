@@ -15,4 +15,5 @@ class ProductRepositoryImpl @Inject constructor(private val networkProductDataSo
 
         return products.bimap(leftOperation = { it }, rightOperation = { it.asDomainModel() })
     }
+
 }

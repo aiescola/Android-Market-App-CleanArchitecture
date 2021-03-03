@@ -1,7 +1,7 @@
 package com.aitor.samplemarket.usecase
 
 import arrow.core.right
-import com.aitor.samplemarket.ProductMother.listOfProducts
+import com.aitor.samplemarket.ProductObjectMother.listOfProducts
 import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.domain.repository.ProductRepository
 import com.aitor.samplemarket.domain.usecase.FetchProducts

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aitor.samplemarket.R
+import com.aitor.samplemarket.base.features.SearchFilterFeature
 import com.aitor.samplemarket.common.showToast
 import com.aitor.samplemarket.databinding.FragmentShopBinding
 import com.aitor.samplemarket.databinding.LayoutErrorBinding
@@ -25,6 +26,7 @@ import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.shop.screens.shop.adapter.ProductAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * This screen displays the product list and allows the user to buy
@@ -35,6 +37,7 @@ import timber.log.Timber
 class ShopFragment : Fragment() {
 
     private val shopViewModel: ShopViewModel by viewModels()
+    @Inject lateinit var searchFilterFeature: SearchFilterFeature
 
     private lateinit var binding: FragmentShopBinding
     private lateinit var errorLayoutBinding: LayoutErrorBinding
@@ -108,15 +111,25 @@ class ShopFragment : Fragment() {
     }
 
     private fun setupSearchBar() {
-        binding.searchFilter.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
+        if (searchFilterFeature.enabled) {
+            binding.searchFilter.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable) {}
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                shopViewModel.applySearchFilter(s.toString())
-            }
-        })
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    shopViewModel.applySearchFilter(s.toString())
+                }
+            })
+        } else {
+            binding.searchFilter.visibility = View.GONE
+        }
     }
 
     private fun onLoading() {
@@ -140,8 +153,10 @@ class ShopFragment : Fragment() {
             errorLayoutBinding.errorRefresh.visibility = View.GONE
             progressBar.visibility = View.GONE
 
-            searchFilter.visibility = View.VISIBLE
             productContainer.visibility = View.VISIBLE
+            if (searchFilterFeature.enabled) {
+                searchFilter.visibility = View.VISIBLE
+            }
         }
 
         productAdapter.submitList(products)

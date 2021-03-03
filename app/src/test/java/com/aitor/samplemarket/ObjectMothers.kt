@@ -1,12 +1,12 @@
 package com.aitor.samplemarket
 
-import com.aitor.samplemarket.domain.model.DiscountType
 import com.aitor.samplemarket.data.network.model.NetworkDiscount
-import com.aitor.samplemarket.domain.model.Product
 import com.aitor.samplemarket.data.network.model.NetworkProduct
 import com.aitor.samplemarket.data.network.model.NetworkProductsAnswer
+import com.aitor.samplemarket.domain.model.DiscountType
+import com.aitor.samplemarket.domain.model.Product
 
-object DiscountMother {
+object DiscountObjectMother {
     val PRODUCT_DISCOUNT =
         NetworkDiscount(
             "DISCOUNT",
@@ -38,7 +38,7 @@ object DiscountMother {
         )
 }
 
-object ProductMother {
+object ProductObjectMother {
     val listOfProducts = listOf(
         Product("mock1", "aa", 4.0),
         Product("mock2", "aab", 4.0),
@@ -60,7 +60,7 @@ object ProductMother {
         )
 }
 
-object NetworkProductMother {
+object NetworkProductObjectMother {
     val networkProducts = listOf(
         NetworkProduct(
             "test code",

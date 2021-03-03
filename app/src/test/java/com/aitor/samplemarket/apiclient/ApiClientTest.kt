@@ -4,9 +4,9 @@ import arrow.core.left
 import arrow.core.right
 import com.aitor.samplemarket.MockWebServerTest
 import com.aitor.samplemarket.data.network.ApiClient
-import com.aitor.samplemarket.domain.model.ApiError
 import com.aitor.samplemarket.data.network.model.NetworkProduct
 import com.aitor.samplemarket.data.network.model.NetworkProductsAnswer
+import com.aitor.samplemarket.domain.model.ApiError
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

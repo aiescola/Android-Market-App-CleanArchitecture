@@ -1,11 +1,9 @@
 package com.aitor.samplemarket.repository
 
 import arrow.core.Either
-import arrow.core.Option
 import arrow.core.right
-import arrow.core.some
 import com.aitor.samplemarket.BaseTest
-import com.aitor.samplemarket.DiscountMother.PRODUCT_DISCOUNT
+import com.aitor.samplemarket.DiscountObjectMother.PRODUCT_DISCOUNT
 import com.aitor.samplemarket.data.network.datasource.NetworkDiscountDataSource
 import com.aitor.samplemarket.data.network.model.NetworkDiscount
 import com.aitor.samplemarket.data.repository.DiscountRepositoryImpl

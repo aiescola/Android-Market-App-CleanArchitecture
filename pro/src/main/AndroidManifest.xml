@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.aitor.samplemarket.pro">
+
+    <application
+        android:name=".ProMarketApplication"
+        android:theme="@style/ProTheme"
+        tools:replace="android:name, android:theme"
+        />
+
+</manifest>

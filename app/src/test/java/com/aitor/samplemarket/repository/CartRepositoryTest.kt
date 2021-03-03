@@ -1,9 +1,9 @@
 package com.aitor.samplemarket.repository
 
 import com.aitor.samplemarket.BaseTest
-import com.aitor.samplemarket.ProductMother
-import com.aitor.samplemarket.domain.model.CartItem
+import com.aitor.samplemarket.ProductObjectMother
 import com.aitor.samplemarket.data.repository.CartRepositoryImpl
+import com.aitor.samplemarket.domain.model.CartItem
 import com.aitor.samplemarket.domain.model.Product
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -23,7 +23,7 @@ class CartRepositoryTest : BaseTest() {
     }
 
     @Test
-    fun `add product to cart for the first time`() {
+    fun `add product to cart for the firsttime`() {
         val (expectedProduct, expectedAddAmount) = givenAProductToAdd()
 
         cartRepository.addItemToCart(expectedProduct, expectedAddAmount)
@@ -95,13 +95,13 @@ class CartRepositoryTest : BaseTest() {
     }
 
     private fun givenAProductToAdd(addAmount: Int = 2): Pair<Product, Int> {
-        return ProductMother.listOfProducts.random() to addAmount
+        return ProductObjectMother.listOfProducts.random() to addAmount
     }
 
     private fun givenSomeProductsToAdd(
         itemsToRetrieve: Int = 2, addAmount: Int = 2
     ): Pair<List<Product>, Int> {
-        return ProductMother.listOfProducts.shuffled().take(itemsToRetrieve) to addAmount
+        return ProductObjectMother.listOfProducts.shuffled().take(itemsToRetrieve) to addAmount
     }
 
 }
